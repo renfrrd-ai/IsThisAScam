@@ -13,8 +13,8 @@
     "dev:server": "npm run dev --workspace @scamradar/server",
     "build": "npm run build --workspace @scamradar/types && npm run build --workspace @scamradar/shared && npm run build --workspace @scamradar/server && npm run build --workspace @scamradar/web",
     "test": "npm run test --workspaces --if-present",
-    "lint": "npm run lint --workspaces --if-present",
-    "typecheck": "npm run typecheck --workspaces --if-present"
+    "lint": "npm run build --workspace @scamradar/types && npm run build --workspace @scamradar/shared && npm run lint --workspace @scamradar/server && npm run lint --workspace @scamradar/web && npm run lint --workspace @scamradar/shared && npm run lint --workspace @scamradar/types",
+    "typecheck": "npm run build --workspace @scamradar/types && npm run build --workspace @scamradar/shared && npm run typecheck --workspace @scamradar/server && npm run typecheck --workspace @scamradar/web && npm run typecheck --workspace @scamradar/shared && npm run typecheck --workspace @scamradar/types"
   },
   "devDependencies": {
     "@types/node": "^20.12.12",

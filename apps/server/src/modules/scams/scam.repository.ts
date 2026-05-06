@@ -1,5 +1,11 @@
 import type { SupabaseClient } from "@supabase/supabase-js";
-import type { Category, Database, ScamDetail, ScamSummary } from "@scamradar/types";
+import type {
+  Category,
+  Database,
+  ScamDetail,
+  ScamSearchFilters,
+  ScamSummary,
+} from "@scamradar/types";
 import { getSupabaseClient } from "../../db/supabase";
 import { mapCategory, mapScamDetail, mapScamSummary } from "./scam.mapper";
 
@@ -26,18 +32,47 @@ export class ScamRepository {
   }
 
   async listApprovedScams(): Promise<ScamSummary[]> {
-    const { data, error } = await this.supabase
+    return this.searchApprovedScams({});
+  }
+
+  async searchApprovedScams(filters: ScamSearchFilters): Promise<ScamSummary[]> {
+    let query = this.supabase
       .from("scams")
       .select("*, categories(*)")
-      .eq("status", "approved")
-      .order("created_at", { ascending: false });
+      .eq("status", "approved");
+
+    if (filters.platform) {
+      query = query.ilike("platform", `%${filters.platform}%`);
+    }
+
+    if (filters.country) {
+      query = query.ilike("country", `%${filters.country}%`);
+    }
+
+    if (filters.q) {
+      query = query.or(
+        `title.ilike.%${filters.q}%,description.ilike.%${filters.q}%,how_it_works.ilike.%${filters.q}%`,
+      );
+    }
+
+    const { data, error } = await query.order("created_at", { ascending: false });
 
     if (error) {
       throw error;
     }
 
-    return (data as ScamWithCategory[] | null ?? [])
+    return ((data as ScamWithCategory[] | null) ?? [])
       .filter((row) => row.categories)
+      .filter((row) =>
+        filters.category ? row.categories?.slug === filters.category : true,
+      )
+      .filter((row) =>
+        filters.phrase
+          ? row.example_messages.some((message) =>
+              message.toLowerCase().includes(filters.phrase!.toLowerCase()),
+            )
+          : true,
+      )
       .map((row) => mapScamSummary(row, mapCategory(row.categories!)));
   }
 
@@ -62,4 +97,3 @@ export class ScamRepository {
     return mapScamDetail(row, mapCategory(row.categories));
   }
 }
-

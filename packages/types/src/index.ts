@@ -48,6 +48,14 @@ export interface ScamReport {
   createdAt: string;
 }
 
+export interface ScamSearchFilters {
+  q?: string;
+  category?: string;
+  platform?: string;
+  country?: string;
+  phrase?: string;
+}
+
 export interface AiCheckLog {
   id: string;
   inputText: string;

@@ -23,3 +23,7 @@ export function isNonEmptyString(value: unknown): value is string {
 export function isValidSlug(value: string) {
   return /^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(value);
 }
+
+export function sanitizePlainText(value: string) {
+  return value.replace(/\s+/g, " ").trim();
+}
