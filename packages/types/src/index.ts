@@ -31,6 +31,15 @@ export interface ScamDetail extends ScamSummary {
   recoverySteps: string[];
   emotionalTriggers: string[];
   relatedScamSlugs: string[];
+  relatedScams?: Array<{
+    id: string;
+    title: string;
+    slug: string;
+    description: string;
+    severity: RiskLevel;
+    platform?: string;
+    category: string;
+  }>;
   updatedAt?: string;
 }
 
@@ -63,6 +72,18 @@ export interface AiCheckLog {
   aiResponse: Record<string, unknown>;
   matchedScams: unknown[];
   createdAt: string;
+}
+
+export interface AiCheckResponse {
+  riskLevel: string;
+  explanation: string;
+  warningSigns: string[];
+  safetyRecommendations: string[];
+  confidence: string;
+  similarScams: Array<{ title: string; slug: string; similarity?: number }>;
+  matchedPatterns: string[];
+  urgencyIndicators: string[];
+  emotionalTriggers: string[];
 }
 
 export interface ApiHealth {

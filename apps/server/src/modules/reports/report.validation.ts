@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { sanitizePlainText, isValidUrl } from "@scamradar/shared";
 
 export const reportSubmissionSchema = z.object({
   title: z.string().trim().min(3).max(160),
@@ -12,4 +13,17 @@ export const reportSubmissionSchema = z.object({
 });
 
 export type ReportSubmission = z.infer<typeof reportSubmissionSchema>;
+
+// Validate and sanitize input
+export function validateReportInput(input: unknown) {
+  const parsed = reportSubmissionSchema.parse(input);
+  return {
+    ...parsed,
+    title: sanitizePlainText(parsed.title),
+    description: sanitizePlainText(parsed.description),
+    platform: sanitizePlainText(parsed.platform),
+    country: parsed.country ? sanitizePlainText(parsed.country) : undefined,
+    messageText: parsed.messageText ? sanitizePlainText(parsed.messageText) : undefined,
+  };
+}
 

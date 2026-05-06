@@ -50,7 +50,7 @@ export interface Database {
           country: string | null;
           platform: string | null;
           status: Database["public"]["Enums"]["scam_status"];
-          embedding: string | null;
+          embedding: string | number[] | null;
           created_at: string;
           updated_at: string;
         };
@@ -71,7 +71,7 @@ export interface Database {
           country?: string | null;
           platform?: string | null;
           status?: Database["public"]["Enums"]["scam_status"];
-          embedding?: string | null;
+          embedding?: string | number[] | null;
           created_at?: string;
           updated_at?: string;
         };

@@ -8,6 +8,9 @@ const envSchema = z.object({
   PORT: z.coerce.number().int().positive().default(DEFAULT_PORT),
   SUPABASE_URL: z.string().url().optional(),
   SUPABASE_SERVICE_ROLE_KEY: z.string().min(1).optional(),
+  OPENAI_API_KEY: z.string().min(1).optional(),
+  ADMIN_API_KEY: z.string().min(1).optional(),
+  ALLOWED_ORIGINS: z.string().optional(),
 });
 
 export type ServerEnv = z.infer<typeof envSchema>;

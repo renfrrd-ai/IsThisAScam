@@ -1,8 +1,8 @@
 import type { Database, ScamReport } from "@scamradar/types";
 
-type ReportRow = Database["public"]["Tables"]["reports"]["Row"];
-
-export function mapReport(row: ReportRow): ScamReport {
+export function mapReport(
+  row: Database["public"]["Tables"]["reports"]["Row"],
+): ScamReport {
   return {
     id: row.id,
     title: row.title,
@@ -17,4 +17,3 @@ export function mapReport(row: ReportRow): ScamReport {
     createdAt: row.created_at,
   };
 }
-
