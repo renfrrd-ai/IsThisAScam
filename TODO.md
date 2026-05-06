@@ -31,21 +31,25 @@ This checklist is based on `AGENTS.md` and `PRD.md`. The goal is to build the MV
 
 ## Phase 2 - Data Model and Persistence
 
-- [ ] Select PostgreSQL provider for development.
+- [x] Select PostgreSQL provider for development.
   - Options: local PostgreSQL, Supabase, or Neon.
-- [ ] Choose database access layer.
+  - Selected: Supabase PostgreSQL.
+  - Applied against Supabase project `ScamRadar`.
+- [x] Choose database access layer.
   - Recommended: Prisma or Drizzle for typed schema and migrations.
-- [ ] Create initial database schema.
+  - Selected for MVP: Supabase JS client with SQL migrations to keep the stack light.
+- [x] Create initial database schema.
   - `categories`
   - `scams`
   - `reports`
   - `ai_checks`
-- [ ] Add scam status fields for moderation.
+  - Local migration created and applied remotely through Supabase MCP.
+- [x] Add scam status fields for moderation.
   - Support draft, pending, approved, and rejected states where needed.
-- [ ] Add seed data.
+- [x] Add seed data.
   - Include initial categories such as Romance, Crypto, Banking, Job, Scholarship, Phishing, Marketplace, and Fake Support.
   - Add a few safe, educational sample scam entries.
-- [ ] Add database validation tests.
+- [x] Add database validation tests.
   - Verify required fields.
   - Verify category relationships.
   - Verify moderation status defaults.
