@@ -1,0 +1,24 @@
+{
+  "name": "scamradar",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "dev": "npm run dev --workspace @scamradar/web",
+    "dev:web": "npm run dev --workspace @scamradar/web",
+    "dev:server": "npm run dev --workspace @scamradar/server",
+    "build": "npm run build --workspace @scamradar/types && npm run build --workspace @scamradar/shared && npm run build --workspace @scamradar/server && npm run build --workspace @scamradar/web",
+    "test": "npm run test --workspaces --if-present",
+    "lint": "npm run lint --workspaces --if-present",
+    "typecheck": "npm run typecheck --workspaces --if-present"
+  },
+  "devDependencies": {
+    "@types/node": "^20.12.12",
+    "prettier": "^3.2.5",
+    "typescript": "^5.4.5"
+  }
+}
