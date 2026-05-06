@@ -77,6 +77,47 @@ export interface Database {
         };
         Update: Partial<Database["public"]["Tables"]["scams"]["Insert"]>;
       };
+      moderator_applications: {
+        Row: {
+          id: string;
+          name: string;
+          email: string;
+          reason: string;
+          experience: string | null;
+          availability: string | null;
+          status: string;
+          admin_notes: string | null;
+          created_at: string;
+          reviewed_at: string | null;
+          reviewed_by: string | null;
+        };
+        Insert: {
+          id?: string;
+          name: string;
+          email: string;
+          reason: string;
+          experience?: string | null;
+          availability?: string | null;
+          status?: string;
+          admin_notes?: string | null;
+          created_at?: string;
+          reviewed_at?: string | null;
+          reviewed_by?: string | null;
+        };
+        Update: {
+          id?: string;
+          name?: string;
+          email?: string;
+          reason?: string;
+          experience?: string | null;
+          availability?: string | null;
+          status?: string;
+          admin_notes?: string | null;
+          created_at?: string;
+          reviewed_at?: string | null;
+          reviewed_by?: string | null;
+        };
+      };
       reports: {
         Row: {
           id: string;

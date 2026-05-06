@@ -15,7 +15,6 @@ import { createCategoriesRouter } from "./routes/categories";
 import { healthRouter } from "./routes/health";
 import { createReportsRouter } from "./routes/reports";
 import { createScamsRouter } from "./routes/scams";
-import { createStatsRouter } from "./routes/stats";
 
 export interface AppDependencies {
   scamRepository?: ScamRepository;
@@ -54,8 +53,6 @@ export function createApp(dependencies: AppDependencies = {}) {
 
   app.use(cors(corsOptions));
   app.use(express.json({ limit: "1mb" }));
-
-  // Logging - less verbose in production
   app.use(isProduction ? morgan("combined") : morgan("dev"));
 
   const scamRepository = dependencies.scamRepository ?? new ScamRepository();
@@ -71,7 +68,6 @@ export function createApp(dependencies: AppDependencies = {}) {
   app.use("/health", healthRouter);
   app.use("/categories", createCategoriesRouter(scamRepository));
   app.use("/scams", createScamsRouter(scamRepository));
-  app.use("/stats", createStatsRouter(scamRepository));
   app.use("/reports", createReportsRouter(reportRepository, reportRateLimit));
   app.use("/ai", createAiRouter(aiService));
   app.use("/admin/reports", createAdminReportsRouter(reportRepository, scamRepository));
