@@ -1,0 +1,21 @@
+services:
+  - type: web
+    name: scamradar-server
+    env: node
+    plan: starter
+    rootDir: apps/server
+    buildCommand: cd ../.. && npm run build --workspace @scamradar/server
+    startCommand: cd apps/server && node dist/index.js
+    envVars:
+      - key: SUPABASE_URL
+        sync: false
+      - key: SUPABASE_SERVICE_ROLE_KEY
+        sync: false
+      - key: OPENAI_API_KEY
+        sync: false
+      - key: ADMIN_API_KEY
+        sync: false
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 3000

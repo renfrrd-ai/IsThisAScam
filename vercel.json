@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "framework": "vite",
+  "buildCommand": "cd ../.. && npm run build --workspace @scamradar/web",
+  "outputDirectory": "apps/web/dist",
+  "installCommand": "npm install",
+  "env": {
+    "VITE_API_URL": "@scamradar-api-url"
+  }
+}
