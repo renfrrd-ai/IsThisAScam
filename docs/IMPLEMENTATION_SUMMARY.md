@@ -215,12 +215,17 @@ npm run typecheck
 - Add "Be a Moderator" call-to-action
 
 ### Phase 13: Moderator Application (Complete)
-- `/moderator-application` page with form
-- Validation, rate limiting, and admin-review-ready statuses
-- Success state with confirmation
+- `/moderator-application` page with form (frontend)
+- `moderator_applications` table with migration
+- ModeratorApplicationRepository with create/list/updateStatus
+- POST /admin/moderator-applications (public submit)
+- GET /admin/moderator-applications (admin list)
+- PATCH /admin/moderator-applications/:id (admin update status)
+- Zod validation for name, email, reason, experience, availability
+- Admin notes and review timestamp (status: pending/approved/rejected)
 
 ### Phase 15: Post-MVP (In Progress)
-- Country-specific scam trends (`/trends` page)
+- Country-specific scam trends (`/trends` page) ✅
   - Statistics by country with severity breakdown
   - Top categories per country
   - Country filter dropdown
